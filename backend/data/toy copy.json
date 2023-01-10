@@ -1,0 +1,17 @@
+[
+    {
+        "createdAt": 1673276744677,
+        "imgUrl": "assets/img/baby_doll.jpg",
+        "inStock": false,
+        "labels": [
+            "Doll",
+            "Battery Powered",
+            "Baby",
+            "Outdoor"
+        ],
+        "name": "talking doll",
+        "owner": "5FqKl",
+        "price": 16,
+        "_id": "WkdKT"
+    }
+]
