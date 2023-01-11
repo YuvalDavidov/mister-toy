@@ -1,0 +1,16 @@
+{
+  "files": {
+    "main.css": "/static/css/main.fc0c8650.css",
+    "main.js": "/static/js/main.ba758a10.js",
+    "static/js/787.95f1c328.chunk.js": "/static/js/787.95f1c328.chunk.js",
+    "static/media/baby_doll.jpg": "/static/media/baby_doll.3e1c73286c200391d4b9.jpg",
+    "index.html": "/index.html",
+    "main.fc0c8650.css.map": "/static/css/main.fc0c8650.css.map",
+    "main.ba758a10.js.map": "/static/js/main.ba758a10.js.map",
+    "787.95f1c328.chunk.js.map": "/static/js/787.95f1c328.chunk.js.map"
+  },
+  "entrypoints": [
+    "static/css/main.fc0c8650.css",
+    "static/js/main.ba758a10.js"
+  ]
+}

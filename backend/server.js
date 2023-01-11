@@ -5,13 +5,24 @@ const app = express()
 const toyService = require('./services/toy.service.js')
 const userService = require('./services/user.service.js')
 
-app.use(express.static('public'))
+// app.use(express.static('public'))
 
-const corsOptions = {
-    origin: ['http://127.0.0.1:8080', 'http://localhost:8080', 'http://127.0.0.1:3000', 'http://localhost:3000'],
-    credentials: true
+// const corsOptions = {
+//     origin: ['http://127.0.0.1:8080', 'http://localhost:8080', 'http://127.0.0.1:3000', 'http://localhost:3000'],
+//     credentials: true
+// }
+// app.use(cors(corsOptions))
+
+
+if (process.env.NODE_ENV === 'production') {
+    app.use(express.static(path.resolve(__dirname, 'public')))
+} else {
+    const corsOptions = {
+        origin: ['http://127.0.0.1:3000', 'http://localhost:3000'],
+        credentials: true
+    }
+    app.use(cors(corsOptions))
 }
-app.use(cors(corsOptions))
 
 app.use(cookieParser())
 app.use(express.json())
@@ -132,6 +143,7 @@ app.post('/api/user/login', (req, res) => {
 })
 
 app.post('/api/user/signup', (req, res) => {
+    console.log(req);
     const { fullname, username, password, score } = req.body
     userService.signup({ fullname, username, password, score })
         .then((user) => {
@@ -148,6 +160,24 @@ app.post('/api/user/signup', (req, res) => {
 app.post('/api/user/logout', (req, res) => {
     res.clearCookie('loginToken')
     res.send('Logged out')
+})
+
+// update score
+app.put('/api/user/update', (req, res) => {
+
+    const loggedinUser = userService.validateToken(req.cookies.loginToken)
+    if (!loggedinUser) return res.status(401).send('Cannot update toy')
+
+    const user = req.body
+    userService.save(loggedinUser, user)
+        .then((savedUser) => {
+            console.log('hi');
+            res.send(savedUser)
+        })
+        .catch(err => {
+            console.log('Error:', err);
+            res.status(400).send('Cannot update toy')
+        })
 })
 
 

@@ -12,5 +12,12 @@
     "username": "yuval",
     "password": "123",
     "score": 1000
+  },
+  {
+    "_id": "SFRSM",
+    "fullname": "asfd",
+    "username": "muki1234",
+    "password": "muki1",
+    "score": 9988
   }
 ]

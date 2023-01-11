@@ -10,15 +10,23 @@ module.exports = {
 }
 
 function query(filterBy) {
+    filterBy.labels = filterBy.labels.split(',')
+    if (filterBy.labels.length === 1) filterBy.labels = filterBy.labels.join('')
+    console.log(filterBy);
     filterBy.maxPrice = +filterBy.maxPrice
     let filteredToys = toys
-    if (filterBy.vendor) {
-        const regex = new RegExp(filterBy.vendor, 'i')
+
+    if (filterBy.labels) {
+        filteredToys = filteredToys.filter(toy => toy.labels.includes(filterBy.labels))
+    }
+    if (filterBy.txt) {
+        const regex = new RegExp(filterBy.txt, 'i')
         filteredToys = filteredToys.filter(toy => regex.test(toy.name))
     }
     if (filterBy.maxPrice) {
         filteredToys = filteredToys.filter(toy => toy.price <= filterBy.maxPrice)
     }
+    // console.log('filteredToys:', filteredToys);
     return Promise.resolve(filteredToys)
 }
 

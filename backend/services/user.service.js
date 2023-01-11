@@ -12,7 +12,8 @@ module.exports = {
     login,
     signup,
     getLoginToken,
-    validateToken
+    validateToken,
+    save
 }
 function getLoginToken(user) {
     return cryptr.encrypt(JSON.stringify(user))
@@ -21,6 +22,12 @@ function getLoginToken(user) {
 function query(filterBy) {
     let filteredUsers = users
     return Promise.resolve(filteredUsers)
+}
+
+function save({ _id }, userTosave) {
+    let oldUserdIdx = users.findIndex(user => user._id === _id)
+    users.splice(oldUserdIdx, 1, userTosave)
+    return _writeUsersToFile().then(() => userTosave)
 }
 
 function get(userId) {
